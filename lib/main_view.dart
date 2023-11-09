@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
-  const MainView({super.key});
+  const MainView({
+    super.key,
+  });
 
   @override
   State<MainView> createState() => Buttons();
@@ -10,29 +12,19 @@ class MainView extends StatefulWidget {
 
 class Buttons extends State<MainView> {
 var count = 0;
-bool flag_plus = false;
-bool flag_minus = false;
 
 void plusBtnPress(){
   setState(() {
-    count++;
-    if(count>=10){
-      flag_plus = true;
-    }
-    else{
-      flag_minus = false;
+    if(count<10){
+      ++count;
     }
   });
 }
 
 void minusBtnPress(){
   setState(() {
-    count--;
-    if(count <= 0){
-      flag_minus = true;
-    }
-    else{
-      flag_plus = false;
+    if(count > 0){
+      --count;
     }
   });
 }
@@ -61,39 +53,39 @@ void minusBtnPress(){
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ElevatedButton(onPressed:  flag_plus ? null: () => plusBtnPress()
-                        ,style: ElevatedButton.styleFrom(
+                    ElevatedButton(onPressed:  count < 10 ? () => plusBtnPress() : null,
+                        style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow,
                           disabledBackgroundColor: Colors.grey,
                           foregroundColor: Colors.red,
                           disabledForegroundColor: Colors.black,
                           minimumSize: Size(75, 75),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
+                            borderRadius: BorderRadius.circular(50),
                           ),
                           textStyle: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),child: const Text("+")),
-                    Container(
-                      child: Text(
+
+                      Text(
                           "$count",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                       ),
-                    ),
-                    ElevatedButton(onPressed:  flag_minus ? null: () => minusBtnPress()
-                        ,style: ElevatedButton.styleFrom(
+
+                    ElevatedButton(onPressed:  count > 0 ? () => minusBtnPress() : null,
+                        style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow,
                           disabledBackgroundColor: Colors.grey,
                           foregroundColor: Colors.red,
                           disabledForegroundColor: Colors.black,
                           minimumSize: Size(75, 75),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
+                            borderRadius: BorderRadius.circular(50),
                           ),
                           textStyle: const TextStyle(
                             fontSize: 20,
